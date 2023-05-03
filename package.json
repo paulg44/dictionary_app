@@ -1,0 +1,21 @@
+{
+  "name": "dictionary_app",
+  "version": "1.0.0",
+  "description": "I decided to create an online dictionary to tests my skills at Javascript and fetching an API while parsing different parts of data from it. I will also include some tests as to keep on practising them.\r Here I will document what I learnt along the way.",
+  "main": "main.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulg44/dictionary_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulg44/dictionary_app/issues"
+  },
+  "homepage": "https://github.com/paulg44/dictionary_app#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
+  }
+}

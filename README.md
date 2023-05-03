@@ -14,3 +14,5 @@ I also learnt how to pick the specific data I wanted from the API, not too diffi
 I had adjective and adverb in the definitions also, however are have commented them out as they are not that popular and replaced them with the audio of the phonetic
 
 # Testing
+
+I have used playwright for testing as it's currently the one I am most comfortable with

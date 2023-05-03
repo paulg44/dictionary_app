@@ -7,10 +7,8 @@ async function dictionaryApi() {
   const refreshBtn = document.querySelector('#refresh');
   let noun = document.querySelector('#noun');
   let verb = document.querySelector('#verb');
-  // let adjective = document.querySelector('#adjective');
-  // let adverb = document.querySelector('#adverb');
+  const audioBtn = document.querySelector('#audio');
 
-  // Event listener for input
   // This event listener needs to be async so that it only functions when needed
   // Event listener using Enter
   inputWord.addEventListener('keydown', async e => {
@@ -24,6 +22,7 @@ async function dictionaryApi() {
     defineWord();
   });
 
+  // Function for getting the value of the input
   async function defineWord() {
     word = inputWord.value;
 
@@ -57,36 +56,19 @@ async function dictionaryApi() {
     // Verb textContent
     verb.textContent = data[0].meanings[1].definitions[randomVerb].definition;
 
-    // Adjective
-    // Random Adjective
-    // const randomAdjective = Math.floor(
-    //   Math.random() * data[0].meanings[2].definitions.length
-    // );
-    // // Adjective textContent
-    // adjective.textContent =
-    //   data[0].meanings[2].definitions[randomAdjective].definition;
-
-    // // Adverb
-    // // Random Adverb
-    // const randomAdverb = Math.floor(
-    //   Math.random() * data[0].meanings[3].definitions.length
-    // );
-    // // Adverb textContent
-    // adverb.textContent =
-    //   data[0].meanings[3].definitions[randomAdverb].definition;
+    // Event listener for audio button
+    audioBtn.addEventListener('click', async e => {
+      const audioUrl = data[0].phonetics[1].audio;
+      const audio = new Audio(audioUrl);
+      audio.play();
+    });
   }
-
-  // Write some code for if one of the four options doesnt exist
-
-  // Write some code for when a word doesn't exist or spelt wrong etc
 
   // Event listener for refresh button
   refreshBtn.addEventListener('click', e => {
     inputWord.value = '';
     noun.textContent = '';
     verb.textContent = '';
-    // adjective.textContent = '';
-    // adverb.textContent = '';
   });
 }
 dictionaryApi();
