@@ -15,25 +15,37 @@ test('page title', async ({ page }) => {
 // Input Test
 test('test input is correct value', async ({ page }) => {
   const input = page.getByLabel('Enter your word');
-
   await page.goto(homePage);
   await input.fill('word');
 
   await expect(input).toHaveValue('word');
 });
 
-// Define button sends request to API
-test('define sends request', async ({ page }) => {
+// Check that noun shows when button clicked
+test('define adds a noun', async ({ page }) => {
   const input = page.getByLabel('Enter your word');
+  const defineBtn = page.getByRole('button', { name: 'Define' });
+  const nounDisplay = page.getByTestId('noun');
+
+  await page.goto(homePage);
+  await input.fill('word');
+  await defineBtn.click();
+  await page.waitForTimeout(3000);
+
+  await expect(nounDisplay).toBeInViewport();
 });
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
-// test('test input is correct value', async ({ page }) => {});
+
+// Check that refresh button clears input
+test('refresh clears input', async ({ page }) => {
+  const input = page.getByLabel('Enter your word');
+  const defineBtn = page.getByRole('button', { name: 'Define' });
+  const refreshBtn = page.getByRole('button', { name: 'Refresh' });
+
+  await page.goto(homePage);
+  await input.fill('word');
+  await defineBtn.click();
+  await page.waitForTimeout(3000);
+  await refreshBtn.click();
+
+  await expect(input).toBeEmpty();
+});
