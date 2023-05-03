@@ -9,6 +9,8 @@ async function dictionaryApi() {
   let verb = document.querySelector('#verb');
   const audioBtn = document.querySelector('#audio');
 
+  let audio = null;
+
   // This event listener needs to be async so that it only functions when needed
   // Event listener using Enter
   inputWord.addEventListener('keydown', async e => {
@@ -59,7 +61,10 @@ async function dictionaryApi() {
     // Event listener for audio button
     audioBtn.addEventListener('click', async e => {
       const audioUrl = data[0].phonetics[1].audio;
-      const audio = new Audio(audioUrl);
+      if (audio) {
+        audio.pause();
+      }
+      audio = new Audio(audioUrl);
       audio.play();
     });
   }
@@ -69,6 +74,10 @@ async function dictionaryApi() {
     inputWord.value = '';
     noun.textContent = '';
     verb.textContent = '';
+    if (audio) {
+      audio.pause();
+    }
+    audio = null;
   });
 }
 dictionaryApi();
