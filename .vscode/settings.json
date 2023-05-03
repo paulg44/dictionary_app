@@ -1,0 +1,9 @@
+{
+  "workbench.colorCustomizations": {
+    "[Monokai Pro (Filter Machine)]": {},
+    "activityBar.background": "#610702",
+    "titleBar.activeBackground": "#870A03",
+    "titleBar.activeForeground": "#FFFBFB"
+  },
+  "liveServer.settings.port": 5501
+}

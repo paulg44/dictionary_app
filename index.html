@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=], initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla&display=swap"
+      rel="stylesheet"
+    />
+    <title>Dictionary App</title>
+  </head>
+  <body>
+    <h1>Welcome to the online dictionary!!</h1>
+    <div class="enter-word-container">
+      <label for="word">Enter Your Word</label>
+      <input id="word" type="text" />
+      <button id="button">Define</button>
+    </div>
+    <div class="definition-container">
+      <div class="noun-container inner-container">
+        <h2>Noun:</h2>
+        <p id="noun"></p>
+      </div>
+      <div class="verb-container inner-container">
+        <h2>Verb:</h2>
+        <p id="verb"></p>
+      </div>
+      <!-- <div class="adjective-container inner-container">
+        <h2>Adjective:</h2>
+        <p id="adjective"></p>
+      </div>
+      <div class="adverb-container inner-container">
+        <h2>Adverb:</h2>
+        <p id="adverb"></p>
+      </div> -->
+    </div>
+    <button id="refresh">Refresh</button>
+    <script src="main.js"></script>
+  </body>
+</html>
