@@ -7,6 +7,7 @@ async function dictionaryApi() {
   const refreshBtn = document.querySelector('#refresh');
   let noun = document.querySelector('#noun');
   let verb = document.querySelector('#verb');
+  let phonetic = document.querySelector('#phonetic');
   const audioBtn = document.querySelector('#audio');
 
   let audio = null;
@@ -37,9 +38,27 @@ async function dictionaryApi() {
     const data = await response.json();
     console.log(data);
     if (!response.ok) {
-      return alert(
-        'Input does not exist or is spelt incorrectly, please try again.'
-      );
+      return styledAlert();
+    }
+
+    // Styled Alert Box
+    function styledAlert() {
+      let msg = 'Word not found, or incorrectly spelt, please try again.';
+      // Create alert box
+      let alertBox = document.createElement('div');
+      alertBox.className = 'alert';
+      alertBox.textContent = msg;
+
+      // Create close button for alert box
+      let closeBtn = document.createElement('button');
+      closeBtn.textContent = 'Close';
+      closeBtn.className = 'close';
+      closeBtn.addEventListener('click', () => {
+        alertBox.remove();
+      });
+
+      alertBox.appendChild(closeBtn);
+      document.body.appendChild(alertBox);
     }
 
     // Noun
@@ -60,6 +79,7 @@ async function dictionaryApi() {
 
     // Event listener for audio button
     audioBtn.addEventListener('click', async e => {
+      phonetic.textContent = data[0].phonetic;
       const audioUrl = data[0].phonetics[1].audio;
       if (audio) {
         audio.pause();
@@ -74,6 +94,7 @@ async function dictionaryApi() {
     inputWord.value = '';
     noun.textContent = '';
     verb.textContent = '';
+    phonetic.textContent = '';
     if (audio) {
       audio.pause();
     }
@@ -104,9 +125,9 @@ dictionaryApi();
         b. check if word is spelt correct ✅
         c. if nothing is returned create error pop up ✅
         d. style alert
-    7. Get audio phonetic from API 
-        a. create audio button 
-        b. connect button to an evenListener 
-        c. use audio in API to play sound
+    7. Get audio phonetic from API ✅ 
+        a. create audio button ✅ 
+        b. connect button to an evenListener ✅  
+        c. use audio in API to play sound ✅ 
 
 */

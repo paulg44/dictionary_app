@@ -15,4 +15,4 @@ I had adjective and adverb in the definitions also, however are have commented t
 
 # Testing
 
-I have used playwright for testing as it's currently the one I am most comfortable with
+I have used playwright for testing as it's currently the one I am most comfortable with, I have tested basic elements like the input and if things appear as they should. I have not yet learnt how to test API's are being called correctly

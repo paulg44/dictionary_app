@@ -22,6 +22,7 @@ body {
   height: 100vh;
 }
 
+/* General Styles */
 button {
   font-family: 'Karla', sans-serif;
   width: 150px;
@@ -35,6 +36,20 @@ button {
   cursor: pointer;
 }
 
+.refresh-btn {
+  width: 100px;
+  background-color: var(--grey-color);
+  border: 1px solid var(--dark-blue);
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
 label {
   margin-top: 10px;
 }
@@ -46,6 +61,7 @@ input {
   margin-top: 10px;
 }
 
+/* Styling for main content */
 .enter-word-container {
   display: flex;
   flex-direction: column;
@@ -53,4 +69,37 @@ input {
 
 .inner-container {
   margin: 20px 0;
+}
+
+/* Alert Box */
+.alert {
+  position: absolute;
+  top: 25%;
+  left: 60%;
+  width: 200px;
+  height: 140px;
+  background-color: var(--dark-blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px 10px;
+  text-align: center;
+  border: 2px solid red;
+  animation: grow 0.5s ease-in;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Alert Box close button */
+.close {
+  background-color: var(--light-color);
+  color: var(--dark-blue);
+  align-items: center;
+  margin: 10px;
 }
