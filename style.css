@@ -1,5 +1,6 @@
 :root {
   --dark-blue: #101d42;
+  --secondary-color: #213c85;
   --grey-color: #747c92;
   --light-color: #f6fedb;
 }
@@ -11,8 +12,8 @@
 }
 
 body {
-  font-family: 'Karla', sans-serif;
-  background-color: var(--grey-color);
+  font-family: "Karla", sans-serif;
+  background: linear-gradient(var(--grey-color), var(--secondary-color));
   color: var(--light-color);
   display: flex;
   flex-direction: column;
@@ -24,7 +25,7 @@ body {
 
 /* General Styles */
 button {
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
   width: 150px;
   padding: 10px;
   border-radius: 20px;

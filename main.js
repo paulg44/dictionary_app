@@ -80,7 +80,7 @@ async function dictionaryApi() {
     // Event listener for audio button
     audioBtn.addEventListener('click', async e => {
       phonetic.textContent = data[0].phonetic;
-      const audioUrl = data[0].phonetics[1].audio;
+      const audioUrl = data[0].phonetics[1].audio || data[0].phonetics[0].audio;
       if (audio) {
         audio.pause();
       }
