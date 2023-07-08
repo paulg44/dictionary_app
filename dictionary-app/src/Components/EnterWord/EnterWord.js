@@ -1,13 +1,14 @@
 // Component for the user input of a word
 // Imports
-import Button from "../Button/Button";
+
+import "./EnterWord.css";
 
 function EnterWordContainer() {
   return (
     <div class="enterWordContainer">
       <label for="word">Enter Your Word</label>
       <input id="word" type="text" />
-      <Button btnText="Define" />
+      <button className="standardBtn">Define</button>
     </div>
   );
 }

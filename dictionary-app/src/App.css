@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
+:root {
+  --dark-blue: #101d42;
+  --secondary-color: #213c85;
+  --grey-color: #747c92;
+  --light-color: #f6fedb;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  font-family: "Karla", sans-serif;
+  background: linear-gradient(var(--grey-color), var(--secondary-color));
+  color: var(--light-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+/* Button Styles */
+button {
+  font-family: "Karla", sans-serif;
+  width: 150px;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  background-color: var(--dark-blue);
+  color: var(--light-color);
+  border: none;
+  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
+.refreshBtn {
+  width: 100px;
+  background-color: var(--grey-color);
+  border: 1px solid var(--dark-blue);
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.inner-container {
+  margin: 20px 0;
+}
+
+/* Alert Box */
+.alert {
+  position: absolute;
+  top: 25%;
+  left: 60%;
+  width: 200px;
+  height: 140px;
+  background-color: var(--dark-blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px 10px;
+  text-align: center;
+  border: 2px solid red;
+  animation: grow 0.5s ease-in;
+}
+
+@keyframes grow {
   from {
-    transform: rotate(0deg);
+    transform: scale(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1);
   }
+}
+
+/* Alert Box close button */
+.close {
+  background-color: var(--light-color);
+  color: var(--dark-blue);
+  align-items: center;
+  margin: 10px;
 }
