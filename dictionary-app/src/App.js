@@ -38,6 +38,18 @@ function App() {
         if (!response.ok) {
           throw new Error("Word not available");
         }
+        // Update state variables
+        // Noun
+        const randomNoun = Math.floor(
+          Math.random() * data[0].meanings[0].definitions.length
+        );
+        setNoun(data[0].meanings[0].definitions[randomNoun].definition);
+        console.log(noun);
+        // Verb
+        const randomVerb = Math.floor(
+          Math.random() * data[0].meanings[1].definitions.length
+        );
+        setVerb(data[0].meanings[1].definitions[randomVerb].definition);
       } catch (error) {
         console.error(error);
       }
@@ -59,12 +71,10 @@ function App() {
     console.log("define btn clicked");
   }
 
-  // Update state variables
-  // const randomNoun = Math.floor(
-  //   Math.random() * data[0].meanings[0].definitions.length
-  // );
-  // setNoun(data[0].meanings[0].definitions[randomNoun].definition);
-  // console.log(noun);
+  // Event listener for Phonetic btn
+  function phoneticHandleClick() {
+    setPhonetic();
+  }
 
   return (
     <div>
@@ -75,7 +85,7 @@ function App() {
         defineHandleClick={defineHandleClick}
         handleInputChange={handleInputChange}
       />
-      <DefinitionContainer />
+      <DefinitionContainer noun={noun} verb={verb} />
       <button className="refreshBtn">Refresh</button>
     </div>
   );
