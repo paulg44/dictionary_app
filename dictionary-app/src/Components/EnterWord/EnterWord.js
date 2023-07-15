@@ -6,18 +6,9 @@ import "./EnterWord.css";
 function EnterWordContainer({
   defineHandleClick,
   handleInputChange,
+  handleInputKeyPress,
   userInput,
 }) {
-  // //   States
-  // const [userInput, setUserInput] = useState({ word: "" });
-
-  // // Function for getting value of input
-  // function handleInputChange(event) {
-  //   const inputText = event.target.value;
-  //   setUserInput({ word: inputText });
-  //   console.log(userInput);
-  // }
-
   return (
     <div className="enterWordContainer">
       <label htmlFor="word">Enter Your Word</label>
@@ -26,6 +17,7 @@ function EnterWordContainer({
         value={userInput}
         onChange={handleInputChange}
         required
+        onKeyDown={handleInputKeyPress}
       />
       <button className="standardBtn" onClick={defineHandleClick}>
         Define

@@ -1,6 +1,6 @@
 // Component for Definition Container
 
-function DefinitionContainer({ noun, verb }) {
+function DefinitionContainer({ noun, verb, phonetic, phoneticHandleClick }) {
   return (
     <div className="definition-container">
       <div className="noun-container inner-container">
@@ -11,8 +11,8 @@ function DefinitionContainer({ noun, verb }) {
         <h2>Verb: {verb}</h2>
         <p id="verb"></p>
       </div>
-      <button id="audio">Phonetic</button>
-      <p id="phonetic"></p>
+      <button onClick={phoneticHandleClick}>Phonetic</button>
+      <p>{phonetic}</p>
     </div>
   );
 }

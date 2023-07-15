@@ -12,7 +12,10 @@ import DefinitionContainer from "./Components/Definition/Definition";
                    - noun
                    - verb
                    - phonetic
-                   - audio
+                   - audio??????
+    - Add error pop up if word doesnt exist   
+    - Refresh when button clicked 
+    - Make user input work when enter pressed as well as button clicked           
 
 
 */
@@ -25,6 +28,8 @@ function App() {
   const [phonetic, setPhonetic] = useState("");
   const [audio, setAudio] = useState(null);
   const [userInput, setUserInput] = useState("");
+  // To use API data outside of api function
+  const [apiData, setApiData] = useState(null);
 
   // Call the API
   useEffect(() => {
@@ -38,6 +43,7 @@ function App() {
         if (!response.ok) {
           throw new Error("Word not available");
         }
+        setApiData(data);
         // Update state variables
         // Noun
         const randomNoun = Math.floor(
@@ -50,6 +56,9 @@ function App() {
           Math.random() * data[0].meanings[1].definitions.length
         );
         setVerb(data[0].meanings[1].definitions[randomVerb].definition);
+        console.log(verb);
+        // Phonetic
+        setPhonetic(data[0].phonetic);
       } catch (error) {
         console.error(error);
       }
@@ -57,11 +66,18 @@ function App() {
     defineWord();
   }, [word]);
 
-  // Function for getting value of input
+  // Even handler for getting value of input
   function handleInputChange(event) {
     const inputText = event.target.value;
     setUserInput(inputText);
     console.log(userInput);
+  }
+
+  // Event handler for input key press
+  function handleInputKeyPress(event) {
+    if (event.key === "Enter") {
+      defineHandleClick();
+    }
   }
 
   // Event listener for define btn
@@ -73,9 +89,33 @@ function App() {
 
   // Event listener for Phonetic btn
   function phoneticHandleClick() {
-    setPhonetic();
+    setPhonetic(phonetic);
+    if (audio) {
+      audio.pause();
+    }
+    if (apiData && apiData[0]?.phonetics) {
+      const audioUrl =
+        apiData[0].phonetics[1]?.audio || apiData[0].phonetics[0]?.audio;
+      if (audioUrl) {
+        const newAudio = new Audio(audioUrl);
+        newAudio.play();
+        setAudio(newAudio);
+      }
+    }
+    console.log("phonetic btn clicked");
   }
 
+  // Event listener for Refresh btn
+  function refreshHandleClick() {
+    // Resets all states
+    setWord("");
+    setNoun("");
+    setVerb("");
+    setPhonetic("");
+    setAudio("");
+    setUserInput("");
+    console.log("refresh btn clicked");
+  }
   return (
     <div>
       <h1>Welcome to the online dictionary!!</h1>
@@ -84,9 +124,17 @@ function App() {
         userInput={userInput}
         defineHandleClick={defineHandleClick}
         handleInputChange={handleInputChange}
+        handleInputKeyPress={handleInputKeyPress}
       />
-      <DefinitionContainer noun={noun} verb={verb} />
-      <button className="refreshBtn">Refresh</button>
+      <DefinitionContainer
+        noun={noun}
+        verb={verb}
+        phonetic={phonetic}
+        phoneticHandleClick={phoneticHandleClick}
+      />
+      <button className="refreshBtn" onClick={refreshHandleClick}>
+        Refresh
+      </button>
     </div>
   );
 }
