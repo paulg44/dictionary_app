@@ -24,32 +24,57 @@ function App() {
   const [verb, setVerb] = useState("");
   const [phonetic, setPhonetic] = useState("");
   const [audio, setAudio] = useState(null);
+  const [userInput, setUserInput] = useState("");
 
   // Call the API
-  async function defineWord() {
-    try {
-      const response = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en_GB/${word}`
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("Word not available");
+  useEffect(() => {
+    async function defineWord() {
+      try {
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en_GB/${word}`
+        );
+        const data = await response.json();
+        console.log(data);
+        if (!response.ok) {
+          throw new Error("Word not available");
+        }
+      } catch (error) {
+        console.error(error);
       }
-
-      // Update state variables
-      const randomNoun = Math.floor(
-        Math.random() * data[0].meanings[0].definitions.length
-      );
-      setNoun(data[0].meanings[0].definitions[randomNoun].definition);
-    } catch (error) {
-      console.error(error);
     }
+    defineWord();
+  }, [word]);
+
+  // Function for getting value of input
+  function handleInputChange(event) {
+    const inputText = event.target.value;
+    setUserInput(inputText);
+    console.log(userInput);
   }
+
+  // Event listener for define btn
+  function defineHandleClick() {
+    setWord(userInput);
+    // defineWord();
+    console.log("define btn clicked");
+  }
+
+  // Update state variables
+  // const randomNoun = Math.floor(
+  //   Math.random() * data[0].meanings[0].definitions.length
+  // );
+  // setNoun(data[0].meanings[0].definitions[randomNoun].definition);
+  // console.log(noun);
 
   return (
     <div>
       <h1>Welcome to the online dictionary!!</h1>
-      <EnterWordContainer setWord={setWord} />
+      <EnterWordContainer
+        setWord={setWord}
+        userInput={userInput}
+        defineHandleClick={defineHandleClick}
+        handleInputChange={handleInputChange}
+      />
       <DefinitionContainer />
       <button className="refreshBtn">Refresh</button>
     </div>
