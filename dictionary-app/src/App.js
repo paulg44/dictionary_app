@@ -41,7 +41,7 @@ function App() {
         const data = await response.json();
         console.log(data);
         if (!response.ok) {
-          throw new Error("Word not available");
+          return styledAlert();
         }
         setApiData(data);
         // Update state variables
@@ -116,6 +116,27 @@ function App() {
     setUserInput("");
     console.log("refresh btn clicked");
   }
+
+  // Styled Alert Box
+  function styledAlert() {
+    let msg = "Word not found, or incorrectly spelt, please try again.";
+    // Create alert box
+    let alertBox = document.createElement("div");
+    alertBox.className = "alert";
+    alertBox.textContent = msg;
+
+    // Create close button for alert box
+    let closeBtn = document.createElement("button");
+    closeBtn.textContent = "Close";
+    closeBtn.className = "close";
+    closeBtn.addEventListener("click", () => {
+      alertBox.remove();
+    });
+
+    alertBox.appendChild(closeBtn);
+    document.body.appendChild(alertBox);
+  }
+
   return (
     <div>
       <h1>Welcome to the online dictionary!!</h1>
