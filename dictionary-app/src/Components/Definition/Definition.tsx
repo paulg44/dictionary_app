@@ -1,6 +1,19 @@
 // Component for Definition Container
+import React from "react";
 
-function DefinitionContainer({ noun, verb, phonetic, phoneticHandleClick }) {
+type DefinitionProps = {
+  noun: string;
+  verb: string;
+  phonetic: string;
+  phoneticHandleClick: () => void;
+};
+
+function DefinitionContainer({
+  noun,
+  verb,
+  phonetic,
+  phoneticHandleClick,
+}: DefinitionProps) {
   return (
     <div className="definition-container">
       <div className="noun-container inner-container">

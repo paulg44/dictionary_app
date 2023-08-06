@@ -1,5 +1,5 @@
 // Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import "./App.css";
 import EnterWordContainer from "./Components/EnterWord/EnterWord";
 import DefinitionContainer from "./Components/Definition/Definition";
@@ -20,16 +20,20 @@ import DefinitionContainer from "./Components/Definition/Definition";
 
 */
 
+type APIResponse = {
+  phonetics: any;
+};
+
 function App() {
   // States
   const [word, setWord] = useState("");
   const [noun, setNoun] = useState("");
   const [verb, setVerb] = useState("");
   const [phonetic, setPhonetic] = useState("");
-  const [audio, setAudio] = useState(null);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [userInput, setUserInput] = useState("");
   // To use API data outside of api function
-  const [apiData, setApiData] = useState(null);
+  const [apiData, setApiData] = useState<APIResponse[]>([]);
 
   // Call the API
   useEffect(() => {
@@ -67,14 +71,14 @@ function App() {
   }, [word]);
 
   // Even handler for getting value of input
-  function handleInputChange(event) {
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const inputText = event.target.value;
     setUserInput(inputText);
     console.log(userInput);
   }
 
   // Event handler for input key press
-  function handleInputKeyPress(event) {
+  function handleInputKeyPress(event: KeyboardEvent) {
     if (event.key === "Enter") {
       defineHandleClick();
     }
@@ -89,11 +93,10 @@ function App() {
 
   // Event listener for Phonetic btn
   function phoneticHandleClick() {
-    setPhonetic(phonetic);
-    if (audio) {
+    if (audio instanceof HTMLAudioElement) {
       audio.pause();
     }
-    if (apiData && apiData[0]?.phonetics) {
+    if (apiData && apiData[0].phonetics) {
       const audioUrl =
         apiData[0].phonetics[1]?.audio || apiData[0].phonetics[0]?.audio;
       if (audioUrl) {
@@ -112,7 +115,7 @@ function App() {
     setNoun("");
     setVerb("");
     setPhonetic("");
-    setAudio("");
+    setAudio(null);
     setUserInput("");
     console.log("refresh btn clicked");
   }
